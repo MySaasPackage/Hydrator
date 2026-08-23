@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efd36a0868650cfdc8fd16488ada83a5",
+    "content-hash": "137aca7599565a7a6662fcb6f83db584",
     "packages": [
         {
             "name": "mysaaspackage/validation",
-            "version": "v0.0.1",
+            "version": "v0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MySaasPackage/Validation.git",
-                "reference": "6f07e1782c9c0628b9e460676ee92616863009bc"
+                "reference": "7fa94d34ea89b80a391a1a48ee6ddf8120165dcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MySaasPackage/Validation/zipball/6f07e1782c9c0628b9e460676ee92616863009bc",
-                "reference": "6f07e1782c9c0628b9e460676ee92616863009bc",
+                "url": "https://api.github.com/repos/MySaasPackage/Validation/zipball/7fa94d34ea89b80a391a1a48ee6ddf8120165dcd",
+                "reference": "7fa94d34ea89b80a391a1a48ee6ddf8120165dcd",
                 "shasum": ""
             },
             "require": {
@@ -33,11 +33,7 @@
                     "MySaasPackage\\Validation\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "MySaasPackage\\Validator\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -47,16 +43,16 @@
                     "email": "alefaraujocastelo@gmail.com"
                 }
             ],
-            "description": "Provides an chaianable API for validate data",
+            "description": "Attribute-based validation returning violations as a value",
             "keywords": [
-                "schema",
+                "attributes",
                 "validation"
             ],
             "support": {
-                "source": "https://github.com/MySaasPackage/Validation/tree/v0.0.1",
-                "issues": "https://github.com/MySaasPackage/Validation/issues"
+                "issues": "https://github.com/MySaasPackage/Validation/issues",
+                "source": "https://github.com/MySaasPackage/Validation/tree/v0.0.2"
             },
-            "time": "2026-08-23T04:34:32+00:00"
+            "time": "2026-08-23T18:44:29+00:00"
         }
     ],
     "packages-dev": [
