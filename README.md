@@ -49,7 +49,7 @@ $input->dueAt;  // DateTimeImmutable('2026-09-01')
 
 - **Property ↔ key by name.** Each public non-static property is filled from the array key with its name, overridable with `#[Map(source: 'q')]` (`MySaasPackage\Hydrator\Attribute\Map`) when the wire name differs from the property name.
 - **Absent keys leave the default.** A key missing from the array never touches the property; `null` is never forced into a non-nullable property.
-- **Nested hydration by type.** A property typed with any class is hydrated recursively from its sub-array; `#[ArrayOf(type: XInput::class)]` (from `MySaasPackage\Validation\Assert`) hydrates each element of an array of sub-arrays.
+- **Nested hydration by type.** A property typed with any class is hydrated recursively from its sub-array; `#[ArrayOf(type: XInput::class)]` (the package's own `MySaasPackage\Hydrator\Attribute\ArrayOf`) hydrates each element of an array of sub-arrays. Any other attribute named `ArrayOf` exposing a public string `type` — such as `MySaasPackage\Validation\Assert\ArrayOf` — is honored too, so a DTO already annotated for validation hydrates without a second attribute.
 - **Coercions.** `''` becomes `null` on nullable string properties; a `DateTimeImmutable`-typed property is constructed from the incoming string (empty string or non-string → `null`).
 - **Instantiation.** Classes without a constructor — or whose constructor has no required parameters — are instantiated through it, so constructor-initialized properties survive; classes with required constructor parameters are instantiated without invoking it.
 

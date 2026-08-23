@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace MySaasPackage\Hydrator\Tests;
 
 use DateTimeImmutable;
+use MySaasPackage\Hydrator\Attribute\ArrayOf;
 use MySaasPackage\Hydrator\Attribute\Map;
 use MySaasPackage\Hydrator\Hydrator;
-use MySaasPackage\Validation\Assert\ArrayOf;
+use MySaasPackage\Hydrator\Tests\Fixture\Assert\ArrayOf as ForeignArrayOf;
 use PHPUnit\Framework\TestCase;
 
 class Address
@@ -45,6 +46,15 @@ class Profile
     public ?DateTimeImmutable $startsAt = null;
 
     public static ?string $registry = null;
+}
+
+class Catalog
+{
+    /**
+     * @var Tag[]|null
+     */
+    #[ForeignArrayOf(type: Tag::class)]
+    public ?array $tags = null;
 }
 
 class Pagination
@@ -133,6 +143,16 @@ class HydratorTest extends TestCase
         self::assertInstanceOf(Tag::class, $profile->tags[1]);
         self::assertSame('a', $profile->tags[0]->label);
         self::assertSame('b', $profile->tags[1]->label);
+    }
+
+    public function testArrayOfShapedAttributeFromAnotherNamespaceIsHonored(): void
+    {
+        $catalog = (new Hydrator())->hydrate(['tags' => [['label' => 'a'], ['label' => 'b']]], Catalog::class);
+
+        self::assertIsArray($catalog->tags);
+        self::assertCount(2, $catalog->tags);
+        self::assertInstanceOf(Tag::class, $catalog->tags[0]);
+        self::assertSame('b', $catalog->tags[1]->label);
     }
 
     public function testDateTimeImmutableIsConstructedFromString(): void

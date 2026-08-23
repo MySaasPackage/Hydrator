@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace MySaasPackage\Hydrator;
 
 use DateTimeImmutable;
+use MySaasPackage\Hydrator\Attribute\ArrayOf;
 use MySaasPackage\Hydrator\Attribute\Map;
-use MySaasPackage\Validation\Assert\ArrayOf;
 use ReflectionClass;
 use ReflectionNamedType;
 use ReflectionProperty;
@@ -90,10 +90,9 @@ class Hydrator
             return $this->hydrate($value, $typeName);
         }
 
-        $arrayOfAttrs = $property->getAttributes(ArrayOf::class);
-        if ([] !== $arrayOfAttrs && is_array($value)) {
-            $elementClass = $arrayOfAttrs[0]->newInstance()->type;
-            if (class_exists($elementClass)) {
+        if (is_array($value)) {
+            $elementClass = $this->resolveElementClass($property);
+            if (null !== $elementClass && class_exists($elementClass)) {
                 return array_map(
                     function (mixed $item) use ($elementClass): mixed {
                         if (!is_array($item)) {
@@ -112,5 +111,29 @@ class Hydrator
         }
 
         return $value;
+    }
+
+    private function resolveElementClass(ReflectionProperty $property): ?string
+    {
+        $own = $property->getAttributes(ArrayOf::class);
+        if ([] !== $own) {
+            return $own[0]->newInstance()->type;
+        }
+
+        // any ArrayOf-shaped attribute counts (e.g. mysaaspackage/validation's),
+        // so a DTO annotated for validation hydrates without a second attribute
+        foreach ($property->getAttributes() as $attribute) {
+            $attributeClass = $attribute->getName();
+            if (!str_ends_with('\\'.$attributeClass, '\\ArrayOf') || !class_exists($attributeClass)) {
+                continue;
+            }
+
+            $instance = $attribute->newInstance();
+            if (property_exists($instance, 'type') && is_string($instance->type)) {
+                return $instance->type;
+            }
+        }
+
+        return null;
     }
 }

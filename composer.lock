@@ -4,57 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "137aca7599565a7a6662fcb6f83db584",
-    "packages": [
-        {
-            "name": "mysaaspackage/validation",
-            "version": "v0.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/MySaasPackage/Validation.git",
-                "reference": "7fa94d34ea89b80a391a1a48ee6ddf8120165dcd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/MySaasPackage/Validation/zipball/7fa94d34ea89b80a391a1a48ee6ddf8120165dcd",
-                "reference": "7fa94d34ea89b80a391a1a48ee6ddf8120165dcd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.19",
-                "phpunit/phpunit": "^10"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MySaasPackage\\Validation\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alef Castelo",
-                    "email": "alefaraujocastelo@gmail.com"
-                }
-            ],
-            "description": "Attribute-based validation returning violations as a value",
-            "keywords": [
-                "attributes",
-                "validation"
-            ],
-            "support": {
-                "issues": "https://github.com/MySaasPackage/Validation/issues",
-                "source": "https://github.com/MySaasPackage/Validation/tree/v0.0.2"
-            },
-            "time": "2026-08-23T18:44:29+00:00"
-        }
-    ],
+    "content-hash": "d1e43b1c4ab5aab42832d90be77963bd",
+    "packages": [],
     "packages-dev": [
         {
             "name": "clue/ndjson-react",
